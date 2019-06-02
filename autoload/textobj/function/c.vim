@@ -33,7 +33,7 @@ function! s:select_a()
   let e = getpos('.')
   normal! %
   call search(')', 'bc')
-  normal! %0k
+  normal! %0
   if substitute(getline('.'), '^\s*$', '', '') == ''
     normal! j
   endif
