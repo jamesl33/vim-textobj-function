@@ -57,11 +57,7 @@ function! textobj#function#select_A()
   let tp = getpos('.')
 
   if lln != 0 && tln != 0
-    if oln < bln
-      return ['V', lp, ep]
-    else
-      return ['V', bp, tp]
-    endif
+    return ['V', lp, tp]
   endif
   if lln != 0
     return ['V', lp, ep]
