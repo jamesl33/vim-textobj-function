@@ -26,6 +26,7 @@ The following languages are currently supported:
 * C language
 * C#
 * C++
+* Go
 * Java
 * JavaScript
 * Julia
@@ -57,7 +58,6 @@ My goal is to support more languages to its last version to make it more and mor
 * Elm
 * Erlang
 * F#
-* Go
 * Groovy
 * Haskell
 * Kotlin
