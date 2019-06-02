@@ -23,6 +23,7 @@ The syntax of a "function" is varied for each language.  So that you have to
 tell the syntax of a function to vim-textobj-function before editing.
 The following languages are currently supported:
 
+* Bash/Shell
 * C language
 * C#
 * C++
@@ -52,7 +53,6 @@ My goal is to support more languages to its last version to make it more and mor
 
 ## Next languages to support
 
-* Bash/Shell
 * Clojure
 * CoffeeScript
 * Elm
