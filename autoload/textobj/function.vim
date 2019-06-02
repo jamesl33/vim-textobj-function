@@ -68,9 +68,5 @@ function! textobj#function#select_A()
   return r
 endfunction
 
-function! textobj#function#select_I()
-  return s:select('a')
-endfunction
-
 " __END__  "{{{1
 " vim: foldmethod=marker

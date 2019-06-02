@@ -33,7 +33,6 @@ call textobj#user#plugin('function', {
 \   'a': {'select': 'af', 'select-function': 'textobj#function#select_a'},
 \   'i': {'select': 'if', 'select-function': 'textobj#function#select_i'},
 \   'A': {'select': 'aF', 'select-function': 'textobj#function#select_A'},
-\   'I': {'select': 'iF', 'select-function': 'textobj#function#select_I'},
 \ })
 
 
