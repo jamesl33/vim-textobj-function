@@ -1,7 +1,6 @@
 static const foo = 10;
 
-int
-Foo(void)
+int Foo(void)
 {
   return 11;
   return 12;
@@ -10,8 +9,7 @@ Foo(void)
 
   static const bar = 21;
 
-  int
-  Bar(void)
+  int Bar(void)
   {
     return 21;
     return 22;
@@ -20,26 +18,20 @@ Foo(void)
 
 static const baz = 31;
 
-int
-Baz(void)
+int Baz(void)
 {
   return 31;
   return 32;
   return 33;
 }
 
-int
-QuxSingle(void) {
+int QuxSingle(void) {
    return 41;
    return 42;
    return 43;
 }
 
-int
-QuxMultiple(
-    int a,
-    char b
-) {
+int QuxMultiple(int a, char b) {
    return 51;
    return 52;
    return 53;
