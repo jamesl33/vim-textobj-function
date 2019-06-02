@@ -27,6 +27,21 @@ function! textobj#function#go#select(object_type)
 endfunction
 
 function! s:select_a()
+  if search('\(return.*\|=.*\)\(^\)\@!func', 'bcnW') != 0 " support golang closures
+    let s = getpos('.')
+    normal! [m
+    let b = getpos('.')
+    normal! %
+    let e = getpos('.')
+    if e[1] >= s[1] " check we are still inside the closure
+      if 1 < e[1] - b[1]  " is there some code?
+        return ['V', b, e]
+      else
+        return 0
+      endif
+    endif
+  endif
+
   if getline('.') != '}'
     normal! ][
   endif
@@ -47,6 +62,27 @@ function! s:select_a()
 endfunction
 
 function! s:select_i()
+  if search('\(return.*\|=.*\)\(^\)\@!func', 'bcnW') != 0 " support golang closures
+    let s = getpos('.')
+    normal! [m
+    let b = getpos('.')
+    normal! %
+    let e = getpos('.')
+    if e[1] >= s[1] " check we are still inside the closure
+      if 1 < e[1] - b[1]  " is there some code?
+        call setpos('.', b)
+        normal! j0
+        let b = getpos('.')
+        call setpos('.', e)
+        normal! k$
+        let e = getpos('.')
+        return ['V', b, e]
+      else
+        return 0
+      endif
+    endif
+  endif
+
   if getline('.') != '}'
     normal! ][
   endif
