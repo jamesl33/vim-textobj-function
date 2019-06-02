@@ -25,11 +25,12 @@ The following languages are currently supported:
 
 * C language
 * C#
+* C++
 * Java
 * JavaScript
 * Julia
-* Perl
 * PHP
+* Perl
 * Python
 * Ruby
 * Vim script
@@ -51,13 +52,11 @@ My goal is to support more languages to its last version to make it more and mor
 ## Next languages to support
 
 * Bash/Shell
-* C++
 * Clojure
 * CoffeeScript
 * Elm
 * Erlang
 * F#
-* Go
 * Go
 * Groovy
 * Haskell
