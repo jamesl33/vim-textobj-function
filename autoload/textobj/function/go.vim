@@ -27,79 +27,32 @@ function! textobj#function#go#select(object_type)
 endfunction
 
 function! s:select_a()
-  if search('\(return.*\|=.*\)\(^\)\@!func', 'bcnW') != 0 " support golang closures
-    let s = getpos('.')
-    normal! [m
-    let b = getpos('.')
-    normal! %
+  if search('^}\|^// }', 'cW') != 0
     let e = getpos('.')
-    if e[1] >= s[1] " check we are still inside the closure
-      if 1 < e[1] - b[1]  " is there some code?
-        return ['V', b, e]
-      else
-        return 0
-      endif
+    normal %
+    if search('//.func\|^func', 'bcW') != 0
+      let b = getpos('.')
+      return ['V', b, e]
     endif
-  endif
-
-  if getline('.') != '}'
-    normal! ][
-  endif
-  let e = getpos('.')
-  normal! %
-  call search(')', 'bc')
-  normal! %0
-  if substitute(getline('.'), '^\s*$', '', '') == ''
-    normal! j
-  endif
-  let b = getpos('.')
-
-  if 1 < e[1] - b[1]  " is there some code?
-    return ['V', b, e]
-  else
-    return 0
   endif
 endfunction
 
 function! s:select_i()
-  if search('\(return.*\|=.*\)\(^\)\@!func', 'bcnW') != 0 " support golang closures
-    let s = getpos('.')
-    normal! [m
-    let b = getpos('.')
-    normal! %
-    let e = getpos('.')
-    if e[1] >= s[1] " check we are still inside the closure
-      if 1 < e[1] - b[1]  " is there some code?
+  if search('//.func\|^func', 'bcW') != 0
+    if search('{$', 'cW') != 0
+      let b = getpos('.')
+      normal %
+      let e = getpos('.')
+      if 1 < e[1] - b[1]
         call setpos('.', b)
-        normal! j0
+        normal j0
         let b = getpos('.')
         call setpos('.', e)
-        normal! k$
+        normal k$
         let e = getpos('.')
         return ['V', b, e]
-      else
-        return 0
       endif
     endif
-  endif
-
-  if getline('.') != '}'
-    normal! ][
-  endif
-  let e = getpos('.')
-  normal! %
-  let b = getpos('.')
-
-  if 1 < e[1] - b[1]  " is there some code?
-    call setpos('.', b)
-    normal! j0
-    let b = getpos('.')
-    call setpos('.', e)
-    normal! k$
-    let e = getpos('.')
-    return ['V', b, e]
-  else
-    return 0
   endif
 endfunction
 
