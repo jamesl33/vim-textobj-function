@@ -27,33 +27,57 @@ function! textobj#function#go#select(object_type)
 endfunction
 
 function! s:select_a()
-  if search('^}\|^// }', 'cW') != 0
-    let e = getpos('.')
-    normal %
-    if search('//.func\|^func', 'bcW') != 0
+  let s = getpos('.')
+  while 1
+    normal ^
+    if search('^func\|^// func\|go func(\|// go func(\|\S.*=.*func(\|\sfunc(\|\s// func(', 'cbW') != 0
       let b = getpos('.')
-      return ['V', b, e]
+      if search('{$', 'cW') != 0
+        normal %
+        let e = getpos('.')
+        if s[1] >= b[1] && s[1] <= e[1]
+          return ['V', b, e]
+        else
+          call setpos('.', b)
+          normal k
+        endif
+      endif
+    else
+      return 0
     endif
-  endif
+  endwhile
 endfunction
 
 function! s:select_i()
-  if search('//.func\|^func', 'bcW') != 0
-    if search('{$', 'cW') != 0
+  let s = getpos('.')
+  while 1
+    normal ^
+    if search('^func\|^// func\|go func(\|// go func(\|\S.*=.*func(\|\sfunc(\|\s// func(', 'cbW') != 0
       let b = getpos('.')
-      normal %
-      let e = getpos('.')
-      if 1 < e[1] - b[1]
-        call setpos('.', b)
-        normal j0
-        let b = getpos('.')
-        call setpos('.', e)
-        normal k$
+      if search('{$', 'cW') != 0
+        normal %
         let e = getpos('.')
-        return ['V', b, e]
+        if s[1] >= b[1] && s[1] <= e[1]
+          if 1 < e[1] - b[1]
+            call setpos('.', b)
+            normal j0
+            let b = getpos('.')
+            call setpos('.', e)
+            normal k$
+            let e = getpos('.')
+            return ['V', b, e]
+          else
+            return 0
+          endif
+        else
+          call setpos('.', b)
+          normal k
+        endif
       endif
+    else
+      return 0
     endif
-  endif
+  endwhile
 endfunction
 
 " __END__
