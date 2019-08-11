@@ -30,9 +30,9 @@ function! s:select_a()
   let s = getpos('.')
   while 1
     normal ^
-    if search('^func\|^// func\|go func(\|// go func(\|\S.*=.*func(\|\sfunc(\|\s// func(', 'cbW') != 0
+    if search('^import.*(\|^// import.*(\|^type\|^// type\|^func\|^// func\|go func(\|// go func(\|\S.*=.*func(\|\sfunc(\|\s// func(', 'cbW') != 0
       let b = getpos('.')
-      if search('{$', 'cW') != 0
+      if search('($\|{$', 'cW') != 0
         normal %
         let e = getpos('.')
         if s[1] >= b[1] && s[1] <= e[1]
@@ -52,9 +52,9 @@ function! s:select_i()
   let s = getpos('.')
   while 1
     normal ^
-    if search('^func\|^// func\|go func(\|// go func(\|\S.*=.*func(\|\sfunc(\|\s// func(', 'cbW') != 0
+    if search('^import.*(\|^// import.*(\|^type\|^// type\|^func\|^// func\|go func(\|// go func(\|\S.*=.*func(\|\sfunc(\|\s// func(', 'cbW') != 0
       let b = getpos('.')
-      if search('{$', 'cW') != 0
+      if search('($\|{$', 'cW') != 0
         normal %
         let e = getpos('.')
         if s[1] >= b[1] && s[1] <= e[1]
